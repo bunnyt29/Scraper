@@ -32,6 +32,6 @@ function method(url, symbol, className) {
         console.log(FinalPrice);
     })  
 }
-PriceInJar('https://www.jarcomputers.com/Samsung-EB-P3400XUEGEU_prod_EBACCSAMSUNGEBP3400XUEGEUS.html')
+
 PriceInEmag('https://www.emag.bg/smartfon-samsung-galaxy-a14-64gb-4gb-ram-4g-silver-sm-a145rzsueue/pd/DQPGV6MBM/')
 PriceInTehnopolis('https://www.technopolis.bg/bg/Smartfoni-i-mobilni-telefoni/Smartfon-GSM-APPLE-IPHONE-15-YELLOW/p/502074');
