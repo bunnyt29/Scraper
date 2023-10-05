@@ -1,14 +1,20 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 
-const headers = {
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0",
-};
 function tehnopolisProduct(url) {  
-    const symbol = '.';
-    const titleTag = "h1";
-    const priceTag = '.price-value';
+    axiosFetch(url, '.', 'h1', '.price-value');
+}
+function emagProduct(url) {
+    axiosFetch(url, ',', 'h1', '.product-new-price');
+}
+function jarProduct(url) {
+    axiosFetch(url, '.', 'h1', '.price');
+}
+function axiosFetch(url, symbol, titleTag, priceTag){
+    const headers = {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0",
+    };
     axios
     .get(
       url, { headers }
@@ -20,30 +26,33 @@ function tehnopolisProduct(url) {
       console.error(error);
     });
 }
-
 function method(axiosRes, symbol, titleTag, priceTag) {
   let dom = cheerio.load(axiosRes.data);
-  var title = dom(titleTag).text();
+  var title = dom(titleTag).text().trim();
   var price = dom(priceTag).first().text();
-  var priceAsArray = price.replace(/\s/g, "").split("");
-  const priceEmptyArray = [];
-  for (let i = 0; i < priceAsArray.length; i++) {
-    var char = priceAsArray[i];     
-    if (char != symbol) priceEmptyArray.push(char);
-    else break;
+  price = price.replace(/\s/g, "").split("");
+  len = price.length;
+  i = 0;
+  while(price[i] != symbol) {
+    len--;
+    i++;
   }
-  var formatedPrice = Number(priceEmptyArray.join(""));
-  outputItem(title, formatedPrice);
+  price = Number(price.slice(0, len*(-1)).join(''));
+  outputItem(title, price);
   
 }
-function outputItem(title, formatedPrice) {
+function outputItem(title, price) {
     console.log("TITLE IS:");
     console.log(title)
     console.log()
     console.log("PRICE IS: ")
-    console.log(formatedPrice)
+    console.log(price)
 }
-tehnopolisProduct("https://www.technopolis.bg/bg/Bluetooth-kolonki/Bluetooth-kolonka-SONY-SRS-XB100B/p/301291");
+//jarProduct("https://www.jarcomputers.com/kingston-hyperx-cloud-ii-red-4p5m0aa-prod-mulhkingstonhyperxcloud2red.html")
+//tehnopolisProduct("https://www.technopolis.bg/bg/Bluetooth-kolonki/Bluetooth-kolonka-SONY-SRS-XB100B/p/301291");
+//emagProduct("https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/");
+
+
 // curently is gets the price, but it needs to be formated. The index.js works perfectry.mist
 // I decided to switch to cherrio, because I don't know to to get more than one element in xray
 // Also, how to save the image to the database. Before that needs to connect to the database.
