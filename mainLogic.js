@@ -1,14 +1,14 @@
-const cheerio = require("cheerio");
-const axios = require("axios");
+import cheerio from 'cheerio';
+import axios from 'axios';
 
-function tehnopolisProduct(url) {  
+export function tehnopolisProduct(url) {  
     axiosFetch(url, '.', 'h1', '.price-value');
 }
-function emagProduct() {
+export function emagProduct() {
     url = "https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/";
     axiosFetch(url, ',', 'h1', '.product-new-price');
 }
-function jarProduct(url) {
+export function jarProduct(url) {
     axiosFetch(url, '.', 'h1', '.price');
 }
 function axiosFetch(url, symbol, titleTag, priceTag){
@@ -53,9 +53,6 @@ function outputItem(title, price) {
 // tehnopolisProduct("https://www.technopolis.bg/bg/Bluetooth-kolonki/Bluetooth-kolonka-SONY-SRS-XB100B/p/301291");
 // emagProduct("https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/");
 
-module.exports = {
-  emagProduct
-}
 // curently is gets the price, but it needs to be formated. The index.js works perfectry.mist
 // I decided to switch to cherrio, because I don't know to to get more than one element in xray
 // Also, how to save the image to the database. Before that needs to connect to the database.
