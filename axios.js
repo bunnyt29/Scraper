@@ -4,7 +4,8 @@ const axios = require("axios");
 function tehnopolisProduct(url) {  
     axiosFetch(url, '.', 'h1', '.price-value');
 }
-function emagProduct(url) {
+function emagProduct() {
+    url = "https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/";
     axiosFetch(url, ',', 'h1', '.product-new-price');
 }
 function jarProduct(url) {
@@ -48,11 +49,13 @@ function outputItem(title, price) {
     console.log("PRICE IS: ")
     console.log(price)
 }
-//jarProduct("https://www.jarcomputers.com/kingston-hyperx-cloud-ii-red-4p5m0aa-prod-mulhkingstonhyperxcloud2red.html")
-//tehnopolisProduct("https://www.technopolis.bg/bg/Bluetooth-kolonki/Bluetooth-kolonka-SONY-SRS-XB100B/p/301291");
-//emagProduct("https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/");
+// jarProduct("https://www.jarcomputers.com/kingston-hyperx-cloud-ii-red-4p5m0aa-prod-mulhkingstonhyperxcloud2red.html")
+// tehnopolisProduct("https://www.technopolis.bg/bg/Bluetooth-kolonki/Bluetooth-kolonka-SONY-SRS-XB100B/p/301291");
+// emagProduct("https://www.emag.bg/zyben-dush-dr-mayer-prenosim-bjal-sin-wt3100/pd/DR7B32BBM/");
 
-
+module.exports = {
+  emagProduct
+}
 // curently is gets the price, but it needs to be formated. The index.js works perfectry.mist
 // I decided to switch to cherrio, because I don't know to to get more than one element in xray
 // Also, how to save the image to the database. Before that needs to connect to the database.
