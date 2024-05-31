@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static('public'));
 
  
-const port = 3000;
+const port = 2000;
 
 app.get('/', (req, res) => {
   res.send('GET request to the homepage')
